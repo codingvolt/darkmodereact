@@ -1,24 +1,35 @@
-import logo from './logo.svg';
+import React, { useState } from 'react'
 import './App.css';
+import { ThemeProvider, CssBaseline, createMuiTheme, Switch } from '@material-ui/core';
 
 function App() {
+
+  const [darkMode, setDarkMode] = useState(false);
+
+  const theme = createMuiTheme({
+    palette: {
+      type: darkMode ? 'dark' : 'light',
+    }
+  })
+
+  const handleDarkMode = () => {
+    setDarkMode(!darkMode);
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={theme}>
+      <CssBaseline>
+        <div className="App">
+        <header className="App-header"> 
+          <Switch onChange={handleDarkMode} value={darkMode}/>
+          <h3>
+            plain website
+          </h3>
+          <h5>Created by @codingvolt</h5>
+        </header>
+        </div>
+      </CssBaseline>
+    </ThemeProvider>
   );
 }
 
